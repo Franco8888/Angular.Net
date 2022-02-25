@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/shared/models/product.model';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'home',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  products: Product[] = [];
 
-  ngOnInit(): void {
+  constructor(
+    private productService: ProductService
+    ) {}
+
+  async ngOnInit() {
+    const result = await this.productService.getProducts();
+
+    this.products = result;
+
+    const addResult = await this.productService.addProducts(this.products[0]);
+
   }
 
 }

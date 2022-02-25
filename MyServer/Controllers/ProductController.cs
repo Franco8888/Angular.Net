@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using MyServer.Models;
 using MyServer.Services;
 
 namespace MyServer.Controllers
@@ -23,9 +25,21 @@ namespace MyServer.Controllers
         // ------------------------------------------------------------------------------------------------------------------------------------------------------------ //
 
         [HttpPost("getproducts")]
-        public IActionResult GetCustomers()
+        public IActionResult GetProducts()
         {
             var result = _productService.GetProducts();
+
+            return Ok(result);
+        }
+
+        // ------------------------------------------------------------------------------------------------------------------------------------------------------------ //
+        // POST addproduct
+        // ------------------------------------------------------------------------------------------------------------------------------------------------------------ //
+
+        [HttpPost("addproduct")]
+        public IActionResult AddProduct([FromBody] Product body)
+        {
+            var result = _productService.AddProduct(body);
 
             return Ok(result);
         }
