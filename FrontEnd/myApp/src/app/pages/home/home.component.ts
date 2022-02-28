@@ -16,11 +16,19 @@ export class HomeComponent implements OnInit {
     ) {}
 
   async ngOnInit() {
-    const result = await this.productService.getProducts();
 
-    this.products = result;
+    const product = new Product('2323', 'Timmy', 900,  'Timmaaaaah', 10);
+    
+    const addResult = await this.productService.addProducts(product);
 
-    const addResult = await this.productService.addProducts(this.products[0]);
+    if(addResult) {
+      const result = await this.productService.getProducts();
+      this.products = result;
+    }
+    
+    var promise = new Promise(() => {
+      //Do Something
+    });
 
   }
 

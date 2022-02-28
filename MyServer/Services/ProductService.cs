@@ -11,19 +11,20 @@ namespace MyServer.Services
 
     public class ProductService : IProductService
     {
+        //Represents data from the DB
+        private List<Product> products = new List<Product>(new Product[] {
+            new Product { Name = "Vape", Description = "It Smokes", Price = 500, Inventory = 10 },
+            new Product { Name = "Mug", Description = "It's a mug", Price = 200, Inventory = 100 }
+        });
+
         public List<Product> GetProducts()
         {
-            var products = new List<Product>();
-
-            products.Add(new Product { Name = "Vape", Description = "It Smokes", Price = 500, Inventory = 10 });
-            products.Add(new Product { Name = "Mug", Description = "It's a mug", Price = 200, Inventory = 100 });
-
             return products;
         }
 
         public bool AddProduct(Product product)
         {
-            var newProduct = new Product {Name = product.Name, Description = product.Description, Price = product.Price, Inventory = product.Inventory};
+            products.Add(product);
 
             return true;
         }
